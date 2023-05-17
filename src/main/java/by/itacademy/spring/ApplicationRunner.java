@@ -1,15 +1,15 @@
 package by.itacademy.spring;
 
 import by.itacademy.spring.database.repository.UserRepository;
-import by.itacademy.spring.dto.CreateUserDto;
-import by.itacademy.spring.mapper.CreateUserMapper;
-import by.itacademy.spring.service.UserService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationRunner {
     public static void main(String[] args) {
-        var userRepository = new UserRepository();
-        var createUserDto = new CreateUserDto();
-        var createUserMapper = new CreateUserMapper(createUserDto);
-        var userService = new UserService(userRepository, createUserMapper);
+        try (var context = new ClassPathXmlApplicationContext("application.xml")) {
+
+            var userRepository = context.getBean("r3", UserRepository.class);
+            System.out.println(userRepository);
+        }
+
     }
 }
