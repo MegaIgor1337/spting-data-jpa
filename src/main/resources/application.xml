@@ -8,64 +8,9 @@
                              http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <context:annotation-config/>
-    <context:property-placeholder location="classpath:application.properties"/>
-<!--    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">-->
-<!--        <property name="locations" value="classpath:application.properties"/>-->
-<!--    </bean>-->
-<!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
-    <bean class="by.itacademy.spring.bpp.InjectBeanPostProcessor"/>
-
-    <bean name="connectionPool1" class="by.itacademy.spring.database.pool.ConnectionPool">
-        <constructor-arg name="username" value="${db.username}"/>
-        <constructor-arg name="password" value="${db.password}"/>
-        <constructor-arg name="url" value="${db.url}"/>
-        <constructor-arg name="poolSize" value="${db.pool.size}"/>
-    </bean>
-
-    <bean name="connectionPool2" class="by.itacademy.spring.database.pool.ConnectionPool">
-        <constructor-arg name="username" value="${db.username}"/>
-        <constructor-arg name="password" value="${db.password}"/>
-        <constructor-arg name="url" value="${db.url}"/>
-        <constructor-arg name="poolSize" value="${db.pool.size}"/>
-    </bean>
-
-
-    <bean name="companyRepository" class="by.itacademy.spring.database.repository.CompanyRepository"/>
-
 
     <bean name="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="PostgresDriver"/>
     </bean>
 
-    <bean id="userRepo1" name="r1, r2, r3" class="by.itacademy.spring.database.repository.UserRepository">
-        <property name="url" ref="driver"/>
-        <property name="username" value="${db.username}"/>
-        <constructor-arg name="username" ref="driver"/>
-        <constructor-arg name="url" value="poastgres:5432"/>
-        <constructor-arg name="poolSize" value="10"/>
-        <constructor-arg name="args">
-            <list>
-                <value>value1</value>
-                <value>value2</value>
-                <value>value3</value>
-                <ref bean="driver"/>
-            </list>
-        </constructor-arg>
-        <constructor-arg name="properties">
-            <map>
-                <entry key="url" value="postgres"/>
-                <entry key="pwd" value="123"/>
-                <entry key="driver" value-ref="#{'driver'.replace('a', 'b')}"/>
-            </map>
-        </constructor-arg>
-    </bean>
-
-    <bean id="createUserDto" name="createUserDto" class="by.itacademy.spring.dto.CreateUserDto" scope="prototype"/>
-    <bean id="createUserMapper" name="createUserMapper" class="by.itacademy.spring.mapper.CreateUserMapper">
-        <constructor-arg name="createUserDto" ref="createUserDto"/>
-    </bean>
-    <bean name="userService" class="by.itacademy.spring.service.UserService">
-        <constructor-arg name="userRepository" ref="userRepo1"/>
-        <constructor-arg name="createUserMapper" ref="createUserMapper"/>
-    </bean>
 </beans>

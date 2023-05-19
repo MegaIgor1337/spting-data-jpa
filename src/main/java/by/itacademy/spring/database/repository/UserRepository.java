@@ -1,32 +1,14 @@
 package by.itacademy.spring.database.repository;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
+import by.itacademy.spring.database.pool.ConnectionPool;
 import lombok.*;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
 
+@Repository
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class UserRepository {
-    private String username;
-    private String url;
 
-    @PostConstruct
-    private void init() {
-        System.out.println("init repo");
+    public UserRepository(ConnectionPool connectionPool2) {
     }
-
-    @PreDestroy
-    private void destroy() {
-        System.out.println("destroy repo");
-    }
-
-    private Integer poolSize;
-    private List<Object> args;
-    private Map<String, Object> properties;
 }
