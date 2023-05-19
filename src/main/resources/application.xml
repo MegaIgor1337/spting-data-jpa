@@ -15,12 +15,20 @@
 <!--    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
     <bean class="by.itacademy.spring.bpp.InjectBeanPostProcessor"/>
 
-    <bean class="by.itacademy.spring.database.pool.ConnectionPool">
+    <bean name="connectionPool1" class="by.itacademy.spring.database.pool.ConnectionPool">
         <constructor-arg name="username" value="${db.username}"/>
         <constructor-arg name="password" value="${db.password}"/>
         <constructor-arg name="url" value="${db.url}"/>
         <constructor-arg name="poolSize" value="${db.pool.size}"/>
     </bean>
+
+    <bean name="connectionPool2" class="by.itacademy.spring.database.pool.ConnectionPool">
+        <constructor-arg name="username" value="${db.username}"/>
+        <constructor-arg name="password" value="${db.password}"/>
+        <constructor-arg name="url" value="${db.url}"/>
+        <constructor-arg name="poolSize" value="${db.pool.size}"/>
+    </bean>
+
 
     <bean name="companyRepository" class="by.itacademy.spring.database.repository.CompanyRepository"/>
 
