@@ -1,18 +1,17 @@
 package by.itacademy.spring;
 
-import by.itacademy.spring.config.ApplicationConfiguration;
-import by.itacademy.spring.database.repository.CompanyRepository;
-import by.itacademy.spring.database.repository.UserRepository;
-import by.itacademy.spring.service.CompanyService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import by.itacademy.spring.database.repository.CompanyRepository;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.SpringProperties;
+
+
+@SpringBootApplication
 public class ApplicationRunner {
     public static void main(String[] args) {
-        try (var context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class)) {
-            var companyService = context.getBean("companyService", CompanyService.class);
-            var company = companyService.findById(1);
-            System.out.println(company);
-        }
+        var context = SpringApplication.run(ApplicationRunner.class, args);
+        var company = context.getBean("companyRepository", CompanyRepository.class);
+        System.out.println(company.getDriver());
     }
 }

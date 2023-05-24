@@ -8,8 +8,6 @@ import org.springframework.context.annotation.*;
 
 @Import(WebConfiguration.class)
 @Configuration
-@PropertySource("classpath:application.properties")
-@ComponentScan(basePackages = "by.itacademy.spring")
 public class ApplicationConfiguration {
 
     @Bean("connectionPool2")
@@ -24,7 +22,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public UserRepository userRepository(ConnectionPool connectionPool2) {
+    public UserRepository userRepository2(ConnectionPool connectionPool2) {
         return new UserRepository(connectionPool2);
     }
 
