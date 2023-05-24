@@ -1,5 +1,6 @@
 package by.itacademy.spring.database.repository;
 
+import by.itacademy.spring.database.entity.Company;
 import by.itacademy.spring.database.pool.ConnectionPool;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @ToString
@@ -23,5 +25,10 @@ public class CompanyRepository {
         this.connectionPool3 = connectionPool3;
         this.poolSize = poolSize;
         this.pools = pools;
+    }
+
+    public Optional<Company> findById(Integer id) {
+        System.out.println("findById method...");
+        return Optional.of(new Company(id));
     }
 }
