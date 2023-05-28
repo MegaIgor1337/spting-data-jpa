@@ -3,9 +3,11 @@ package by.itacademy.spring.database.pool;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @ToString
 public class ConnectionPool {
@@ -26,10 +28,10 @@ public class ConnectionPool {
 
     @PostConstruct
     private void init() {
-        System.out.println("Init pool");
+        log.info("Init pool");
     }
 
     private void destroy() {
-        System.out.println("destroy pool");
+        log.info("destroy pool");
     }
 }
