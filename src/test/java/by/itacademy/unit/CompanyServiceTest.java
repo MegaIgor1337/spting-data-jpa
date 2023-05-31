@@ -35,7 +35,7 @@ public class CompanyServiceTest {
 
     @Test
     void findBuId() {
-        Mockito.doReturn(Optional.of(new Company(COMPANY_ID))).when(companyRepository).findById(COMPANY_ID);
+        Mockito.doReturn(Optional.of(new Company(COMPANY_ID, null))).when(companyRepository).findById(COMPANY_ID);
 
         var actualResult = companyService.findById(COMPANY_ID);
         assertTrue(actualResult.isPresent());

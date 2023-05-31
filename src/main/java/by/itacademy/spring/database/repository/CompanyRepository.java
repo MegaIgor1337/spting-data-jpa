@@ -33,6 +33,6 @@ public class CompanyRepository {
 
     public Optional<Company> findById(Integer id) {
         System.out.println("findById method...");
-        return Optional.of(new Company(id));
+        return Optional.of(new Company(id, null));
     }
 }
