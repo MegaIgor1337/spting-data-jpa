@@ -1,39 +1,30 @@
 package by.itacademy.spring.database.repository;
 
 import by.itacademy.spring.database.entity.Company;
-import by.itacademy.spring.database.pool.ConnectionPool;
-import lombok.Getter;
-import lombok.ToString;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Getter
-@ToString
-public class CompanyRepository {
+public interface CompanyRepository extends JpaRepository<Company, Integer> {
+    @Query("select c from Company c " +
+           "join fetch c.locales c1 " +
+           "where c.name = :name2")
+    Optional<Company> findByName(@Param("name2") String name);
+    List<Company> findAllByNameContainingIgnoreCase(String fragment);
 
-    private ConnectionPool connectionPool3;
-    private Integer poolSize;
-    private List<ConnectionPool> pools;
-    private String driver;
+    // обновление компанни по id
+    @Modifying(clearAutomatically = true)
+    @Query("update Company c " +
+           "set c.name = :name " +
+           "where c.id = :id")
+    Integer updateNameById(String name, Integer id);
 
-    public CompanyRepository(@Qualifier("connectionPool2") ConnectionPool connectionPool3,
-                             @Value("${db.pool.size}") Integer poolSize,
-                             List<ConnectionPool> pools,
-                             @Value("${db.driver}") String driver) {
-        this.connectionPool3 = connectionPool3;
-        this.poolSize = poolSize;
-        this.pools = pools;
-        this.driver = driver;
-    }
-
-    public Optional<Company> findById(Integer id) {
-        System.out.println("findById method...");
-        return Optional.of(new Company(id, null, Collections.emptyMap()));
-    }
+    // удалить компании чьи имена начинаются на определённую букву
+    void deleteByNameStartingWith(String prefix);
 }

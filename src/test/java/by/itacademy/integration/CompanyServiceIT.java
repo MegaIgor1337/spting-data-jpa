@@ -1,7 +1,6 @@
 package by.itacademy.integration;
 
 import by.itacademy.annotation.IT;
-import by.itacademy.spring.database.properties.DatabaseProperties;
 import by.itacademy.spring.dto.CompanyReadDto;
 import by.itacademy.spring.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ public class CompanyServiceIT {
     private static final Integer COMPANY_ID = 1;
 
     private final CompanyService companyService;
-    private final DatabaseProperties databaseProperties;
 
     @Test
     void findById() {
